@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  beam:
+    build: .
+    container_name: apache_beam
+    # Mount the pipeline and notebooks folders
+    volumes:
+      - ./pipelines:/workspace/pipelines
+      - ./notebooks:/workspace/notebooks
+    ports:
+      - "8888:8888"  # Expose Jupyter Notebook on port 8888
+    working_dir: /workspace/pipelines  # Default working directory for pipeline execution
+    entrypoint: ["jupyter", "notebook", "--ip", "0.0.0.0", "--allow-root", "--no-browser", "--notebook-dir=/workspace/notebooks"]
+
+
+
